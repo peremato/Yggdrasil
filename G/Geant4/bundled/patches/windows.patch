@@ -20,3 +20,27 @@
  #else
  #  include <sys/syscall.h>
  #  include <sys/types.h>
+--- a/source/global/management/src/G4FindDataDir.cc
++++ b/source/global/management/src/G4FindDataDir.cc
+@@ -34,9 +34,6 @@
+ #include <cstdlib>
+ #include <cstring>
+ 
+-#if defined(_MSC_VER)
+-#define setenv(name, value, overwrite) _putenv_s(name, value)
+-#endif
+ 
+ using namespace G4fs;
+ 
+@@ -84,7 +81,11 @@ static const char* G4FindDataDir(const char* name, const path& prefix, const pat
+     else
+       datadir /=  path(data_path) / dataset;
+     if (is_directory(absolute(datadir)))
++#if defined(_MSC_VER)
++      return _putenv_s(name, absolute(datadir).string().c_str()) == 0 ? std::getenv(name) : nullptr;
++#else
+       return setenv(name, absolute(datadir).string().c_str(), 0) == 0 ? std::getenv(name) : nullptr;
++#endif
+   }
+ 
+   return nullptr;
