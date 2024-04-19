@@ -11,6 +11,7 @@ sources = [
                   "c5878634da9ba6765ce35a469b2893044f4a6598aa948733da8436cdbfeef7d2"),
     ArchiveSource("https://github.com/phracker/MacOSX-SDKs/releases/download/10.15/MacOSX10.15.sdk.tar.xz",
                   "2408d07df7f324d3beea818585a6d990ba99587c218a3969f924dfcc4de93b62"),
+    DirectorySource("./bundled")
 ]
 
 # Bash recipe for building across all platforms
