@@ -27,9 +27,13 @@ if [[ "${target}" == x86_64-apple-darwin* ]]; then
     popd
 fi
 
+if [[ "${target}" == *-mingw* ]]; then
+    atomic_patch -p1 ../patches/windows.patch
+fi
+
 mkdir build && cd build
 FLAGS=()
-if [[ "${target}" != *-apple-* ]]; then
+if [[ "${target}" != *-w64-* && "${target}" != *-apple-* ]]; then
     FLAGS=(-DGEANT4_USE_OPENGL_X11=ON)
 fi
 cmake -DCMAKE_INSTALL_PREFIX=${prefix} \

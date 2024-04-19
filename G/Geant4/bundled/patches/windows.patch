@@ -1,0 +1,22 @@
+--- a/source/externals/ptl/src/Threading.cc
++++ b/source/externals/ptl/src/Threading.cc
+@@ -27,7 +27,7 @@
+ #include "PTL/Utility.hh"
+ 
+ #if defined(PTL_WINDOWS)
+-#    include <Windows.h>
++#    include <windows.h>
+ #endif
+ 
+ #if defined(PTL_MACOS)
+--- a/source/global/management/src/G4Threading.cc
++++ b/source/global/management/src/G4Threading.cc
+@@ -35,7 +35,7 @@
+ #include "globals.hh"
+ 
+ #if defined(WIN32) || defined(__MINGW32__)
+-#  include <Windows.h>
++#  include <windows.h>
+ #else
+ #  include <sys/syscall.h>
+ #  include <sys/types.h>
