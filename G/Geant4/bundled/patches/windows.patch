@@ -38,7 +38,7 @@ index 3c6bd77b14..fe09e672c7 100644
  #  include <sys/syscall.h>
  #  include <sys/types.h>
 diff --git a/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh b/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh
-index 6161a6164b..587b7cff82 100644
+index 6161a6164b..099070449b 100644
 --- a/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh
 +++ b/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh
 @@ -103,7 +103,7 @@ class TG4MoleculeShoot : public G4MoleculeShoot
@@ -46,7 +46,7 @@ index 6161a6164b..587b7cff82 100644
    TG4MoleculeShoot() : G4MoleculeShoot(){;}
    virtual ~TG4MoleculeShoot(){;}
 -  void Shoot(G4MoleculeGun*){}
-+  void Shoot(G4MoleculeGun*);
++  inline void Shoot(G4MoleculeGun*){}
  
  protected:
    void ShootAtRandomPosition(G4MoleculeGun*){}
