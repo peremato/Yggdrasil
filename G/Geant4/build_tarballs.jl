@@ -39,7 +39,7 @@ if [[ "${target}" != *-w64-* && "${target}" != *-apple-* ]]; then
 fi
 if [[ "${target} == *-w64-* ]]; then
     FLAGS+=(-DGEANT4_BUILD_MULTITHREADED=OFF)
-end
+fi
 cmake -DCMAKE_INSTALL_PREFIX=${prefix} \
       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} \
       -DCMAKE_BUILD_TYPE=Release \
