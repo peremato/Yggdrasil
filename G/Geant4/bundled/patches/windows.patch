@@ -51,18 +51,19 @@ index e11303d2f4..3e4fa17887 100644
  #endif
  
 diff --git a/source/processes/hadronic/models/lend/include/nf_specialFunctions.h b/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
-index 558091652f..6f70f1910d 100644
+index 558091652f..af5d5ff860 100644
 --- a/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
 +++ b/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
-@@ -10,7 +10,7 @@
+@@ -10,8 +10,7 @@
  #include <float.h>
  #include <nf_utilities.h>
  
 -#ifdef WIN32
+-#define isfinite _finite
 +#ifdef _WIN32
- #define isfinite _finite
  #define M_PI 3.141592653589793238463
  /*#define INFINITY (DBL_MAX+DBL_MAX)*/
+ #endif
 diff --git a/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc b/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
 index 65644c9727..d94d42eb78 100644
 --- a/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
