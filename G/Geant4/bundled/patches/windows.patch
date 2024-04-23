@@ -1,3 +1,5 @@
+diff --git a/source/externals/ptl/src/Threading.cc b/source/externals/ptl/src/Threading.cc
+index 324d6c12d7..a7553d8db2 100644
 --- a/source/externals/ptl/src/Threading.cc
 +++ b/source/externals/ptl/src/Threading.cc
 @@ -27,7 +27,7 @@
@@ -9,17 +11,8 @@
  #endif
  
  #if defined(PTL_MACOS)
---- a/source/global/management/src/G4Threading.cc
-+++ b/source/global/management/src/G4Threading.cc
-@@ -35,7 +35,7 @@
- #include "globals.hh"
- 
- #if defined(WIN32) || defined(__MINGW32__)
--#  include <Windows.h>
-+#  include <windows.h>
- #else
- #  include <sys/syscall.h>
- #  include <sys/types.h>
+diff --git a/source/global/management/src/G4FindDataDir.cc b/source/global/management/src/G4FindDataDir.cc
+index 8c80180f71..3f62fc7abd 100644
 --- a/source/global/management/src/G4FindDataDir.cc
 +++ b/source/global/management/src/G4FindDataDir.cc
 @@ -34,9 +34,6 @@
@@ -43,15 +36,36 @@
 +//      return setenv(name, absolute(datadir).string().c_str(), 0) == 0 ? std::getenv(name) : nullptr;
 +//#endif
    }
+ 
+   return nullptr;
+diff --git a/source/global/management/src/G4Threading.cc b/source/global/management/src/G4Threading.cc
+index 3c6bd77b14..fe09e672c7 100644
 --- a/source/global/management/src/G4Threading.cc
 +++ b/source/global/management/src/G4Threading.cc
 @@ -35,7 +35,7 @@
+ #include "globals.hh"
+ 
+ #if defined(WIN32) || defined(__MINGW32__)
+-#  include <Windows.h>
++#  include <windows.h>
+ #else
+ #  include <sys/syscall.h>
+ #  include <sys/types.h>
+diff --git a/source/processes/hadronic/models/lend/include/MCGIDI.h b/source/processes/hadronic/models/lend/include/MCGIDI.h
+index e11303d2f4..82bdf53739 100644
+--- a/source/processes/hadronic/models/lend/include/MCGIDI.h
++++ b/source/processes/hadronic/models/lend/include/MCGIDI.h
+@@ -9,7 +9,7 @@
+ #define MCGIDI_VERSION_MINOR 0
+ #define MCGIDI_VERSION_PATCHLEVEL 0
  
 -#ifdef WIN32
 +#ifdef _MSC_VER
  #define M_PI 3.141592653589793238463
  #endif
  
+diff --git a/source/processes/hadronic/models/lend/include/nf_specialFunctions.h b/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
+index 4321f47a59..6460c5d541 100644
 --- a/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
 +++ b/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
 @@ -11,7 +11,7 @@
@@ -63,6 +77,8 @@
  #define M_PI 3.141592653589793238463
  #endif
  
+diff --git a/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc b/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
+index 65644c9727..b122a31493 100644
 --- a/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
 +++ b/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
 @@ -5,7 +5,7 @@
