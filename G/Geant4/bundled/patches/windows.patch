@@ -12,7 +12,7 @@ index 324d6c12d7..a7553d8db2 100644
  
  #if defined(PTL_MACOS)
 diff --git a/source/global/management/src/G4FindDataDir.cc b/source/global/management/src/G4FindDataDir.cc
-index 8c80180f71..a228ac474a 100644
+index 8c80180f71..7c5a6e0158 100644
 --- a/source/global/management/src/G4FindDataDir.cc
 +++ b/source/global/management/src/G4FindDataDir.cc
 @@ -34,7 +34,7 @@
@@ -24,19 +24,6 @@ index 8c80180f71..a228ac474a 100644
  #define setenv(name, value, overwrite) _putenv_s(name, value)
  #endif
  
-@@ -84,7 +84,11 @@ static const char* G4FindDataDir(const char* name, const path& prefix, const pat
-     else
-       datadir /=  path(data_path) / dataset;
-     if (is_directory(absolute(datadir)))
--      return setenv(name, absolute(datadir).string().c_str(), 0) == 0 ? std::getenv(name) : nullptr;
-+//#if defined(_MSC_VER)
-+      return _putenv_s(name, absolute(datadir).string().c_str()) == 0 ? std::getenv(name) : nullptr;
-+//#else
-+//      return setenv(name, absolute(datadir).string().c_str(), 0) == 0 ? std::getenv(name) : nullptr;
-+//#endif
-   }
- 
-   return nullptr;
 diff --git a/source/global/management/src/G4Threading.cc b/source/global/management/src/G4Threading.cc
 index 3c6bd77b14..fe09e672c7 100644
 --- a/source/global/management/src/G4Threading.cc
