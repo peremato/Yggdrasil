@@ -88,3 +88,18 @@ index 5894aec94d..3b7000dee3 100644
  #include <string.h>
  #include <cmath>
  
+diff --git a/source/processes/hadronic/models/lend/src/xDataTOM_importXML.cc b/source/processes/hadronic/models/lend/src/xDataTOM_importXML.cc
+index afa8a06987..e6e8edfe26 100644
+--- a/source/processes/hadronic/models/lend/src/xDataTOM_importXML.cc
++++ b/source/processes/hadronic/models/lend/src/xDataTOM_importXML.cc
+@@ -11,8 +11,8 @@
+ #include <fcntl.h>
+ #include <errno.h>
+ 
+-#if defined(WIN32) || defined(__MINGW32__)
+-#include <BaseTsd.h>
++#if defined(_WIN32) || defined(__MINGW32__)
++#include <basetsd.h>
+ #include <io.h>
+ #include <windows.h>
+ #define realpath( a, b ) GetFullPathName( a, PATH_MAX, b, NULL )
