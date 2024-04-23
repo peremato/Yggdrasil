@@ -36,11 +36,41 @@
      else
        datadir /=  path(data_path) / dataset;
      if (is_directory(absolute(datadir)))
-+#if defined(_MSC_VER)
+-      return setenv(name, absolute(datadir).string().c_str(), 0) == 0 ? std::getenv(name) : nullptr;
++//#if defined(_MSC_VER)
 +      return _putenv_s(name, absolute(datadir).string().c_str()) == 0 ? std::getenv(name) : nullptr;
-+#else
-       return setenv(name, absolute(datadir).string().c_str(), 0) == 0 ? std::getenv(name) : nullptr;
-+#endif
++//#else
++//      return setenv(name, absolute(datadir).string().c_str(), 0) == 0 ? std::getenv(name) : nullptr;
++//#endif
    }
+--- a/source/global/management/src/G4Threading.cc
++++ b/source/global/management/src/G4Threading.cc
+@@ -35,7 +35,7 @@
  
-   return nullptr;
+-#ifdef WIN32
++#ifdef _MSC_VER
+ #define M_PI 3.141592653589793238463
+ #endif
+ 
+--- a/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
++++ b/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
+@@ -11,7 +11,7 @@
+ 
+ #include "nf_utilities.h"
+ 
+-#ifdef WIN32
++#ifdef _MSC_VER
+ #define M_PI 3.141592653589793238463
+ #endif
+ 
+--- a/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
++++ b/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
+@@ -5,7 +5,7 @@
+ #include <string.h>
+ #include <cmath>
+ 
+-#ifdef WIN32
++#ifdef _MSC_VER
+ #define M_PI 3.141592653589793238463
+ #endif
+ 
