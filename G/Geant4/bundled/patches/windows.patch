@@ -38,18 +38,18 @@ index 3c6bd77b14..fe09e672c7 100644
  #  include <sys/syscall.h>
  #  include <sys/types.h>
 diff --git a/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh b/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh
-index 6161a6164b..099070449b 100644
+index 6161a6164b..2d9d0f2731 100644
 --- a/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh
 +++ b/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh
-@@ -103,7 +103,7 @@ class TG4MoleculeShoot : public G4MoleculeShoot
- public:
-   TG4MoleculeShoot() : G4MoleculeShoot(){;}
-   virtual ~TG4MoleculeShoot(){;}
--  void Shoot(G4MoleculeGun*){}
-+  inline void Shoot(G4MoleculeGun*){}
+@@ -110,6 +110,8 @@ protected:
+   void ShootAtFixedPosition(G4MoleculeGun*){}
+ };
  
- protected:
-   void ShootAtRandomPosition(G4MoleculeGun*){}
++template<> void TG4MoleculeShoot<G4Track>::Shoot(G4MoleculeGun* gun);
++
+ template<typename TYPE>
+ G4shared_ptr<G4MoleculeShoot> G4MoleculeShoot::ChangeType()
+ {
 diff --git a/source/processes/hadronic/models/lend/include/MCGIDI.h b/source/processes/hadronic/models/lend/include/MCGIDI.h
 index e11303d2f4..3e4fa17887 100644
 --- a/source/processes/hadronic/models/lend/include/MCGIDI.h
