@@ -38,7 +38,7 @@ index 3c6bd77b14..fe09e672c7 100644
  #  include <sys/syscall.h>
  #  include <sys/types.h>
 diff --git a/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh b/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh
-index 6161a6164b..2d9d0f2731 100644
+index ef764260ac..54f9a8a17f 100644
 --- a/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh
 +++ b/source/processes/electromagnetic/dna/utils/include/G4MoleculeGun.hh
 @@ -110,6 +110,8 @@ protected:
@@ -64,19 +64,18 @@ index e11303d2f4..3e4fa17887 100644
  #endif
  
 diff --git a/source/processes/hadronic/models/lend/include/nf_specialFunctions.h b/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
-index 558091652f..af5d5ff860 100644
+index 4321f47a59..fe65149e68 100644
 --- a/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
 +++ b/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
-@@ -10,8 +10,7 @@
- #include <float.h>
- #include <nf_utilities.h>
+@@ -11,7 +11,7 @@
+ 
+ #include "nf_utilities.h"
  
 -#ifdef WIN32
--#define isfinite _finite
 +#ifdef _WIN32
  #define M_PI 3.141592653589793238463
- /*#define INFINITY (DBL_MAX+DBL_MAX)*/
  #endif
+ 
 diff --git a/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc b/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
 index 65644c9727..d94d42eb78 100644
 --- a/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
@@ -91,7 +90,7 @@ index 65644c9727..d94d42eb78 100644
  #endif
  
 diff --git a/source/processes/hadronic/models/lend/src/MCGIDI_outputChannel.cc b/source/processes/hadronic/models/lend/src/MCGIDI_outputChannel.cc
-index 5894aec94d..3b7000dee3 100644
+index d22caeb84d..86a3fbccef 100644
 --- a/source/processes/hadronic/models/lend/src/MCGIDI_outputChannel.cc
 +++ b/source/processes/hadronic/models/lend/src/MCGIDI_outputChannel.cc
 @@ -2,6 +2,7 @@

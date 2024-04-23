@@ -3,12 +3,12 @@
 using BinaryBuilder
 
 name = "Geant4"
-version = v"11.1.1"
+version = v"11.2.1"
 
 # Collection of sources required to build
 sources = [
     ArchiveSource("https://gitlab.cern.ch/geant4/geant4/-/archive/v$(version)/geant4-v$(version).tar.gz",
-                  "c5878634da9ba6765ce35a469b2893044f4a6598aa948733da8436cdbfeef7d2"),
+                  "76c9093b01128ee2b45a6f4020a1bcb64d2a8141386dea4674b5ae28bcd23293"),
     ArchiveSource("https://github.com/phracker/MacOSX-SDKs/releases/download/10.15/MacOSX10.15.sdk.tar.xz",
                   "2408d07df7f324d3beea818585a6d990ba99587c218a3969f924dfcc4de93b62"),
     DirectorySource("./bundled")
@@ -37,6 +37,9 @@ FLAGS=()
 if [[ "${target}" != *-w64-* && "${target}" != *-apple-* ]]; then
     FLAGS=(-DGEANT4_USE_OPENGL_X11=ON)
 fi
+if [[ "${target} == *-w64-* ]]; then
+    FLAGS+=(-DGEANT4_BUILD_MULTITHREADED=OFF)
+end
 cmake -DCMAKE_INSTALL_PREFIX=${prefix} \
       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} \
       -DCMAKE_BUILD_TYPE=Release \
