@@ -1,3 +1,5 @@
+diff --git a/source/externals/ptl/src/Threading.cc b/source/externals/ptl/src/Threading.cc
+index 324d6c12d7..a7553d8db2 100644
 --- a/source/externals/ptl/src/Threading.cc
 +++ b/source/externals/ptl/src/Threading.cc
 @@ -27,7 +27,7 @@
@@ -9,6 +11,8 @@
  #endif
  
  #if defined(PTL_MACOS)
+diff --git a/source/global/management/src/G4FindDataDir.cc b/source/global/management/src/G4FindDataDir.cc
+index 8c80180f71..3f62fc7abd 100644
 --- a/source/global/management/src/G4FindDataDir.cc
 +++ b/source/global/management/src/G4FindDataDir.cc
 @@ -34,9 +34,6 @@
@@ -34,6 +38,8 @@
    }
  
    return nullptr;
+diff --git a/source/global/management/src/G4Threading.cc b/source/global/management/src/G4Threading.cc
+index 3c6bd77b14..fe09e672c7 100644
 --- a/source/global/management/src/G4Threading.cc
 +++ b/source/global/management/src/G4Threading.cc
 @@ -35,7 +35,7 @@
@@ -45,6 +51,8 @@
  #else
  #  include <sys/syscall.h>
  #  include <sys/types.h>
+diff --git a/source/processes/hadronic/models/lend/include/MCGIDI.h b/source/processes/hadronic/models/lend/include/MCGIDI.h
+index e11303d2f4..82bdf53739 100644
 --- a/source/processes/hadronic/models/lend/include/MCGIDI.h
 +++ b/source/processes/hadronic/models/lend/include/MCGIDI.h
 @@ -9,7 +9,7 @@
@@ -56,17 +64,21 @@
  #define M_PI 3.141592653589793238463
  #endif
  
+diff --git a/source/processes/hadronic/models/lend/include/nf_specialFunctions.h b/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
+index 558091652f..f61624ff94 100644
 --- a/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
 +++ b/source/processes/hadronic/models/lend/include/nf_specialFunctions.h
-@@ -11,7 +11,7 @@
- 
- #include "nf_utilities.h"
+@@ -10,7 +10,7 @@
+ #include <float.h>
+ #include <nf_utilities.h>
  
 -#ifdef WIN32
 +#ifdef _MSC_VER
+ #define isfinite _finite
  #define M_PI 3.141592653589793238463
- #endif
- 
+ /*#define INFINITY (DBL_MAX+DBL_MAX)*/
+diff --git a/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc b/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
+index 65644c9727..b122a31493 100644
 --- a/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
 +++ b/source/processes/hadronic/models/lend/src/MCGIDI_energy.cc
 @@ -5,7 +5,7 @@
