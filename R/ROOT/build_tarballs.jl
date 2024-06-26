@@ -12,15 +12,33 @@ sources = [
 
 # Bash recipe for building across all platforms
 script = raw"""
+
 cd $WORKSPACE/srcdir
 mkdir build && cd build
 install_license ../root-*/LICENSE
-cmake -DCMAKE_INSTALL_PREFIX=$prefix \
-      -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} \
-      -DCMAKE_BUILD_TYPE=Release \
-      -DCMAKE_CXX_STANDARD=17 \
-      -Dminimal=ON
-      ../root-*/
+
+# Common options/flags
+CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN}"
+
+# Release type and C++ standard
+CMAKE_FLAGS="${CMAKE_FLAGS}
+    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_CXX_STANDARD=17
+    "
+
+# ROOT options to enable/disable
+CMAKE_FLAGS="${CMAKE_FLAGS}
+    -Dfail-on-missing=ON
+    -Dminimal=ON
+    "
+
+# LLVM tries to run a bunch of configure tests. Tell it what the output would have been.
+CMAKE_FLAGS="${CMAKE_FLAGS}
+    -Dfound_urandom_EXITCODE=0
+    -Dfound_urandom_EXITCODE__TRYRUN_OUTPUT=''
+    "
+
+cmake -G "Unix Makefiles" ${CMAKE_FLAGS} ../root-*/
 make -j${nproc}
 make install
 """
@@ -38,8 +56,16 @@ products = [
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    Dependency(PackageSpec(name="OpenSSL_jll", uuid="458c3c95-2e84-50aa-8efc-19380b2a3a95"); compat="1.1.10")
-    Dependency(PackageSpec(name="CompilerSupportLibraries_jll", uuid="e66e0078-7015-5450-92f7-15fbd957f2ae"))
+    Dependency("Zlib_jll")
+    Dependency("Zstd_jll")
+    Dependency("Lz4_jll")
+    Dependency("nlohmann_json_jll")
+    Dependency("FreeType2_jll")
+    Dependency("PCRE_jll")
+    Dependency("XZ_jll")
+    Dependency("xxHash_jll")
+    Dependency("OpenSSL_jll"; compat="1.1.10")
+    #Dependency("LLVM_jll"; compat="16.0")
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
