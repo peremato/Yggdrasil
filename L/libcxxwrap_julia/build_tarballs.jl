@@ -18,6 +18,8 @@ git_repo = "https://github.com/JuliaInterop/libcxxwrap-julia.git"
 # Collection of sources required to complete build
 sources = [
     GitSource(git_repo, "20eaeb785dcd18bd19ae3b029e0349f12f88a05a"),
+    ArchiveSource("https://github.com/roblabla/MacOSX-SDKs/releases/download/13.3/MacOSX13.3.sdk.tar.xz",
+    "e5d0f958a079106234b3a840f93653308a76d3dcea02d3aa8f2841f8df33050c")
 ]
 
 # Bash recipe for building across all platforms
@@ -25,13 +27,26 @@ script = raw"""
 mkdir build
 cd build
 
-cmake \
+if [[ "${target}" == *-apple-darwin* ]]; then
+    cmake \
+    -DJulia_PREFIX=$prefix \
+    -DCMAKE_INSTALL_PREFIX=$prefix \
+    -DCMAKE_FIND_ROOT_PATH=$prefix \
+    -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} \
+    -DCMAKE_SYSROOT=$WORKSPACE/srcdir/MacOSX13.3.sdk \
+    -DCMAKE_OSX_DEPLOYMENT_TARGET=11 \
+    -DCMAKE_BUILD_TYPE=Release \
+    ../libcxxwrap-julia/
+else
+    cmake \
     -DJulia_PREFIX=$prefix \
     -DCMAKE_INSTALL_PREFIX=$prefix \
     -DCMAKE_FIND_ROOT_PATH=$prefix \
     -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} \
     -DCMAKE_BUILD_TYPE=Release \
     ../libcxxwrap-julia/
+fi
+
 VERBOSE=ON cmake --build . --config Release --target install -- -j${nproc}
 install_license $WORKSPACE/srcdir/libcxxwrap-julia*/LICENSE.md
 """
