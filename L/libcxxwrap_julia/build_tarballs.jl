@@ -28,24 +28,22 @@ mkdir build
 cd build
 
 if [[ "${target}" == *-apple-darwin* ]]; then
-    cmake \
-    -DJulia_PREFIX=$prefix \
-    -DCMAKE_INSTALL_PREFIX=$prefix \
-    -DCMAKE_FIND_ROOT_PATH=$prefix \
-    -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} \
-    -DCMAKE_SYSROOT=$WORKSPACE/srcdir/MacOSX13.3.sdk \
-    -DCMAKE_OSX_DEPLOYMENT_TARGET=11 \
-    -DCMAKE_BUILD_TYPE=Release \
-    ../libcxxwrap-julia/
-else
-    cmake \
-    -DJulia_PREFIX=$prefix \
-    -DCMAKE_INSTALL_PREFIX=$prefix \
-    -DCMAKE_FIND_ROOT_PATH=$prefix \
-    -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} \
-    -DCMAKE_BUILD_TYPE=Release \
-    ../libcxxwrap-julia/
+    # Install a newer SDK which supports `ranges`
+    pushd $WORKSPACE/srcdir/MacOSX13.*.sdk
+    rm -rf /opt/${target}/${target}/sys-root/System
+    cp -ra usr/* "/opt/${target}/${target}/sys-root/usr/."
+    cp -ra System "/opt/${target}/${target}/sys-root/."
+    export MACOSX_DEPLOYMENT_TARGET=11
+    popd
 fi
+
+cmake \
+    -DJulia_PREFIX=$prefix \
+    -DCMAKE_INSTALL_PREFIX=$prefix \
+    -DCMAKE_FIND_ROOT_PATH=$prefix \
+    -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN} \
+    -DCMAKE_BUILD_TYPE=Release \
+    ../libcxxwrap-julia/
 
 VERBOSE=ON cmake --build . --config Release --target install -- -j${nproc}
 install_license $WORKSPACE/srcdir/libcxxwrap-julia*/LICENSE.md
